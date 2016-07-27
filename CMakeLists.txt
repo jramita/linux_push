@@ -74,7 +74,19 @@ MESSAGE( STATUS )
 
 
 
+#GETSVN VERSION
+FIND_PACKAGE(Subversion)
+IF(Subversion_FOUND)
+	Subversion_WC_INFO(${CMAKE_HOME_DIRECTORY} Project)
+	MESSAGE("Current revision is ${Project_WC_REVISION}")
+ENDIF(Subversion_FOUND)
 
+
+
+# project version 
+SET( ${PROJECT_NAME}_MAJOR_VERSION 1 ) 
+SET( ${PROJECT_NAME}_MINOR_VERSION 0 ) 
+SET( ${PROJECT_NAME}_PATCH_LEVEL 0 )
 
 
 check_symbol_exists (strncasecmp "string.h" HAVE_STRNCASECMP)
@@ -89,18 +101,7 @@ check_symbol_exists(isnan math.h HAVE_ISNAN_IN_MATH_H)
 check_symbol_exists(ceilf math.h HAVE_CEILF)
 check_symbol_exists(floorf math.h HAVE_FLOORF)
 check_symbol_exists(mallinfo malloc.h HAVE_MALLINFO)
-check_symbol_exists(pthread_mutex_lock pthread.h HAVE_PTHREAD_MUTEX_LOCK)
-check_symbol_exists(strtoll stdlib.h HAVE_STRTOLL)
-check_symbol_exists(getrusage sys/resource.h HAVE_GETRUSAGE)
-check_symbol_exists(setrlimit sys/resource.h HAVE_SETRLIMIT)
 
-check_include_file (dirent.h HAVE_DIRENT_H)
-check_include_file (dlfcn.h HAVE_DLFCN_H)
-check_include_file (execinfo.h HAVE_EXECINFO_H)
-check_include_file (memory.h HAVE_MEMORY_H)
-check_include_file (inttypes.h HAVE_INTTYPES_H)
-check_include_file (strings.h HAVE_STRINGS_H)
-check_include_file (string.h HAVE_STRING_H)
 check_include_file (sys/filio.h HAVE_SYS_FILIO_H)
 check_include_file (sys/ndir.h HAVE_SYS_NDIR_H)
 CHECK_INCLUDE_FILE(netdb.h HAVE_NETDB_H)
